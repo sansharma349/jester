@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jester's History</title>
+</head>
+<body>
+    <h1>📜 The Hall of Fame</h1>
+    <p><a href="/">Home</a> | <a href="/joke">Tell me a new joke</a></p>
+    <hr>
+    
+    <ul>
+    {% for j in all_jokes %}
+        <li>
+            <strong>{{ j.setup }}</strong><br>
+            <i>{{ j.punchline }}</i>
+        </li>
+        <br>
+    {% endfor %}
+    </ul>
+
+</body>
+</html>
