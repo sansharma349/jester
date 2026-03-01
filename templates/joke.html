@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>The Terminal Jester</title>
-</head>
-<body>
-    <h1>🎭 The Terminal Jester</h1>
-    <p><a href="/">Home</a> | <a href="/joke">Tell me a new joke</a> | <a href="/history">View History</a></p>
-    <hr>
-    
-    <h2>{{ setup }}</h2>
-    <p><i>{{ punchline }}</i></p>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+<div class="card shadow p-5 mt-4 text-center">
+    <h2 class="text-primary">{{ setup }}</h2>
+    <br>
+    <h4 class="text-secondary fst-italic">{{ punchline }}</h4>
+    
+    <hr class="my-4">
+    
+    <div>
+        <a href="/" class="btn btn-outline-secondary m-1">Home</a>
+        <a href="/joke" class="btn btn-success m-1">Tell me another one!</a>
+        <a href="/history" class="btn btn-outline-info m-1">View History</a>
+    </div>
+</div>
+{% endblock %}

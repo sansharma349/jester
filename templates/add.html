@@ -1,22 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add a Joke</title>
-</head>
-<body>
-    <h1>🎤 Step up to the Mic!</h1>
-    <p><a href="/">Home</a> | <a href="/history">View History</a></p>
-    <hr>
+{% extends "base.html" %}
 
+{% block content %}
+<div class="card shadow p-5 mt-4">
+    <h2 class="text-primary text-center mb-4">🎤 Step up to the Mic!</h2>
+    
     <form action="/add" method="POST">
-        <label>The Setup:</label><br>
-        <input type="text" name="setup" required size="50"><br><br>
-
-        <label>The Punchline:</label><br>
-        <input type="text" name="punchline" required size="50"><br><br>
-
-        <button type="submit">Submit Joke!</button>
+        <div class="mb-3">
+            <label class="form-label fw-bold">The Setup:</label>
+            <input type="text" name="setup" class="form-control" required placeholder="Why did the developer go broke?">
+        </div>
+        
+        <div class="mb-4">
+            <label class="form-label fw-bold">The Punchline:</label>
+            <input type="text" name="punchline" class="form-control" required placeholder="Because he used up all his cache.">
+        </div>
+        
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg">Submit Joke!</button>
+        </div>
     </form>
-
-</body>
-</html>
+    
+    <div class="text-center mt-4">
+        <a href="/" class="text-decoration-none text-secondary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

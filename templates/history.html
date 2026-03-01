@@ -1,22 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Jester's History</title>
-</head>
-<body>
-    <h1>📜 The Hall of Fame</h1>
-    <p><a href="/">Home</a> | <a href="/joke">Tell me a new joke</a></p>
-    <hr>
-    
-    <ul>
-    {% for j in all_jokes %}
-        <li>
-            <strong>{{ j.setup }}</strong><br>
-            <i>{{ j.punchline }}</i>
-        </li>
-        <br>
-    {% endfor %}
-    </ul>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+<div class="card shadow p-4 mt-4">
+    <h1 class="text-center text-primary mb-4">📜 The Hall of Fame</h1>
+    
+    <div class="text-center mb-4">
+        <a href="/" class="btn btn-outline-secondary btn-sm m-1">Home</a>
+        <a href="/joke" class="btn btn-outline-success btn-sm m-1">Tell me a new joke</a>
+    </div>
+
+    <ul class="list-group">
+        {% for j in all_jokes %}
+        <li class="list-group-item">
+            <strong>{{ j.setup }}</strong><br>
+            <span class="text-muted fst-italic">{{ j.punchline }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

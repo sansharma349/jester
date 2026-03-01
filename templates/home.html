@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>JesterFun Home Page</title>
-</head>
-<body>
-    <h1>Welcome to the JesterFun Web Server!</h1>
-    <p><a href='/joke'>Click to see a new joke</a> | <a href="/add">Click to tell a new joke</a></p>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card shadow p-5 text-center">
+    <h1 class="text-primary display-4">🎭 The JesterFun Terminal</h1>
+    <p class="lead mt-3">Welcome to the world's greatest API-powered comedy club.</p>
+    <hr class="my-4">
+    
+    <div>
+        <a href="/joke" class="btn btn-success btn-lg m-2">Tell me a new joke</a>
+        <a href="/history" class="btn btn-outline-secondary btn-lg m-2">View History</a>
+        <a href="/add" class="btn btn-outline-primary btn-lg m-2">Submit a Joke</a>
+    </div>
+</div>
+{% endblock %}
