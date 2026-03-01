@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 #Import from SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 
@@ -27,7 +27,7 @@ with app.app_context():
 
 @app.route("/")
 def home():
-    return "<h1>Welcome to the Terminal Jester Web Server!</h1><p><a href='/joke'>Click to see a new joke</a></p>"
+    return render_template("home.html")
 
 @app.route("/joke")
 def get_joke():
@@ -69,6 +69,27 @@ def history():
     
     # 2. Render a new template, passing the list of jokes into it
     return render_template("history.html", all_jokes=saved_jokes)
+
+
+@app.route("/add", methods=["GET", "POST"])
+def add_joke():
+    if request.method == "POST":
+        # 1. Grab the text the user typed into the form boxes
+        user_setup = request.form.get("setup")
+        user_punchline = request.form.get("punchline")
+        
+        # 2. Create a new database record and save it
+        new_joke = JokeDb(setup=user_setup, punchline=user_punchline)
+        db.session.add(new_joke)
+        db.session.commit()
+        
+        # 3. Redirect the user to the Hall of Fame to see their work!
+        return redirect("/history")
+        
+    else:
+        # If it's just a regular GET request, show them the blank form
+        return render_template("add.html")
+
 
 if __name__ == "__main__":
     # Back to the clean, standard local server setup!
