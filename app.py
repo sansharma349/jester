@@ -34,7 +34,9 @@ class JokeDb(db.Model):
 # Tell Python to actually create the file and tables before the first request
 with app.app_context():
     db.create_all()
+    print("Database tables checked/created!")
 
+    
 @app.route("/")
 def home():
     return render_template("home.html")
