@@ -1,19 +1,29 @@
+import os
+
 import requests
 from flask import Flask, render_template, request, redirect
 #Import from SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 
 
 app = Flask(__name__)
 
+# This tells Python: "Use the Render Database URL if it exists; 
+# otherwise, use my local SQLite file for testing."
+database_url = os.environ.get('DATABASE_URL', 'sqlite:///jokes.db')
+if database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+
 #Configure the SQLite database file location
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jokes.db'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 #Initialize the SQLAlchemy object with the Flask app
 db = SQLAlchemy(app)
-
+migrate = Migrate(app, db)
 #Create your Database Model (This creates a 'joke' table)
 class JokeDb(db.Model):
     # SQLAlchemy uses capitalized Column and type names
